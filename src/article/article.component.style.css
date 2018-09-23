@@ -1,0 +1,124 @@
+.Article {
+  margin: 0;
+  font-family: 'Limelight', cursive;
+  color: white;
+  background: url("https://images.freeimages.com/images/large-previews/7e8/cinema-seats-1568320.jpg");
+  background-size: inherit;
+  background-position: bottom; }
+
+.header-list {
+  height: 85px;
+  display: flex;
+  font-size: 25px;
+  justify-content: center;
+  align-items: center; }
+  .header-list a {
+    margin: 16px;
+    color: white;
+    text-decoration: none; }
+
+.prev-page-btn {
+  border: none;
+  background: none;
+  cursor: pointer;
+  color: white;
+  font-family: 'Limelight', cursive;
+  font-size: 25px;
+  padding: 20px; }
+
+.prev-article-btn,
+.next-article-btn {
+  border: none;
+  background: none;
+  cursor: pointer;
+  color: white;
+  font-size: 25px;
+  font-family: 'Limelight', cursive; }
+
+.header-container {
+  width: 1140px;
+  height: 100vh;
+  margin: auto; }
+  .header-container .article-col-1-3 {
+    min-height: 500px;
+    background: rgba(0, 0, 0, 0.6);
+    border-radius: 20px;
+    border: 1px solid black; }
+  .header-container .article-col-img {
+    max-width: 60%;
+    max-height: 500px;
+    background-position: top;
+    background-size: cover;
+    float: left;
+    margin-right: 10px;
+    border-radius: 10px; }
+  .header-container p {
+    line-height: 25px;
+    font-family: 'Lato', sans-serif; }
+
+@media (max-width: 1140px) {
+  .Article {
+    background-size: cover; }
+  .header-list {
+    height: 35px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 18px;
+    text-decoration: none; }
+    .header-list a {
+      margin: 6px;
+      color: white;
+      text-decoration: none; }
+  .header-container {
+    width: 100%;
+    display: flex;
+    flex-wrap: nowrap;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center; } }
+
+@media (max-width: 650px) {
+  .Article {
+    background-size: cover; }
+  .header-list {
+    height: 35px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 15px;
+    text-decoration: none; }
+    .header-list a {
+      margin: 6px;
+      color: white;
+      text-decoration: none; }
+  .header-container {
+    width: 100%;
+    display: flex;
+    flex-wrap: nowrap;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center; } }
+
+@media (max-width: 530px) {
+  .Article {
+    background-size: cover; }
+  .header-list {
+    height: 31px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 12px;
+    text-decoration: none;
+    position: fixed; }
+    .header-list a {
+      margin: 8px;
+      color: white;
+      text-decoration: none; }
+  .header-container {
+    width: 100%;
+    display: flex;
+    flex-wrap: nowrap;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center; } }

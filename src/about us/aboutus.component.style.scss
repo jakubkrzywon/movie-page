@@ -1,0 +1,66 @@
+.about-page{
+    margin: 0;
+    font-family: 'Limelight', cursive;
+    color: white;
+    background: black;
+    background: url("https://images.freeimages.com/images/large-previews/7e8/cinema-seats-1568320.jpg");
+    background-size: inherit;
+    background-position: bottom;
+    display: flex;
+    flex-direction: column;
+    .about-header{
+        height: 65px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-size: 30px;
+        a{
+            text-decoration: none;
+            color:white;
+        }
+    }
+    .about-container{
+        margin: auto;
+        display: flex;
+        .about-us{
+            margin:30px;
+            background: rgba(black, 0.6);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            img{
+                max-height: 200px;
+                max-width: 300px;
+                border: 2px solid #C0C0C0;
+            }
+            p{
+                margin: 0;
+            }
+        }
+    }
+}
+@media (max-width: 750px) {
+    .about-container{
+        margin: auto;
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        .about-us .about-container .about-us{
+            margin: 0;
+            width: 100%;
+            background: rgba(black, 0.6);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            img{
+                max-height: 200px;
+                max-width: 300px;
+                border: 2px solid #C0C0C0;
+            }
+            p{
+                width: 100%;
+                margin: 0;
+            }
+        }
+    }
+}
