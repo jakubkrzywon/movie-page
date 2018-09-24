@@ -3,64 +3,59 @@ import {withRouter} from 'react-router-dom';
 import './article.component.style.css'
 import {Link} from 'react-router-dom';
 
-
-function Prev(props) {
-    return (
-        <button onClick={props.toggle} disabled={props.active}>Previous</button>
-    );
-}
-
-function Next(props) {
-    return (
-        <button onClick={props.toggle} disabled={props.active}>Next</button>
-    );
-}
-
-
 class Article extends Component {
     constructor(props) {
         super(props);
 
-    this.state={
-        index: 1,
-        disabledNext: false,
-        disabledPrev: false,
-        data: null,
+
+        this.state = {
+            data: null,
+            index: 0,
+        };
+        this._TogglePrev = this._TogglePrev.bind(this);
+        this._ToggleNext = this._ToggleNext.bind(this);
     }
-    }
+
+
 
 
     componentDidMount() {
         fetch("http://localhost:8080/category/9")
             .then(res => res.json())
-            .then(data => this.setState({data: data.movies}))
-    }
-    togglePrev(e) {
-        let index = this.state.index - 1;
-        let disabledPrev = (index === 0);
+            .then(data => this.setState({data: data.movies[this.state.index]}))
 
-        this.setState({ index: index, disabledPrev: disabledPrev, disabledNext: false })
     }
 
-    toggleNext(e) {
-        let index = this.state.index + 1;
-        let disabledNext = index === (this.state.data.length - 1);
 
-        this.setState({ index: index, disabledNext: disabledNext, disabledPrev: false })
+    _ToggleNext() {
+        if(this.state.index == this.state.data.length - 1)
+            return;
+
+        this.setState(prevState => ({
+            index: prevState.index + 1
+        }))
+    }
+
+    _TogglePrev() {
+        if(this.state.index == 0)
+            return;
+
+        this.setState(prevState => ({
+            index: prevState.index - 1
+        }))
     }
 
     render() {
-
         if (this.state.data === null) {
             return null
         }
+        let {index, data} = this.state;
         console.log(this.state.data);
         const mov = this.state.data.find(movie => {
             return movie.id === Number(this.props.match.params.id)
         });
         console.log(mov);
-        const { index, disabledNext, disabledPrev } = this.state
-        const films = this.state.data ? this.state.data[index] : null
+
 
         const list = <div key={mov.id} className="article-col-1-3">
             <img src={mov.image} className="article-col-img"/>
@@ -78,22 +73,40 @@ class Article extends Component {
         //     <div className="header-container">{list}</div>
         // </div>;
 
-
-        if (films) {
-            return (
-                <div className="Article">
-                    <div className="header-list">
-                        <Prev toggle={(e) => this.togglePrev(e)} active={disabledPrev} />
-                        <Next toggle={(e) => this.toggleNext(e)} active={disabledNext} />
-                    </div>
-                    <div className="header-container">{list}</div>
+        if (mov.id <= 18) {
+            return <div className="Article">
+                <div className="header-list">
+                    <Link to={"/9"}>Artykuły</Link>
+                    <Link to="/">Strona główna</Link>
+                    <Link to={"/wiecej/9" + "/" + (Number(mov.id) + 1)}>Następny
+                        artykuł &rarr;</Link>
                 </div>
-            )
-        } else {
-            return <span>error</span>
+                <div className="header-container">{list}</div>
+            </div>;
+        } else if (mov.id >= 28) {
+            return <div className="Article">
+                <div className="header-list">
+                    <Link to={"/wiecej/9" + "/" + (Number(mov.id) - 1)}>&#8592; Poprzedni
+                        artykuł</Link>
+                    <Link to={"/9"}>Artykuły</Link>
+                    <Link to="/">Strona główna</Link>
+                </div>
+                <div className="header-container">{list}</div>
+            </div>;
+        }  else {return <div className="Article">
+            <div className="header-list">
+                <Link
+                    to={"/wiecej/9"  + "/" + (Number(mov.id) - 1)}>&#8592; Poprzedni
+                    artykuł</Link>
+                <Link to={"/9" }>Artykuły</Link>
+                <Link to="/">Strona główna</Link>
+                <Link to={"/wiecej/9" + "/" + (Number(mov.id) + 1)}>Następny
+                    artykuł &rarr;</Link>
+            </div>
+            <div className="header-container">{list}</div>
+        </div>;
         }
     }
-
 }
 
 export const ArticleComponent1 = withRouter(Article);
