@@ -70,7 +70,7 @@ class Article extends Component {
                     <Link to={"/11" }>Artykuły</Link>
                     <Link to="/">Strona główna</Link>
                     <Link to={"/wiecej/11"+ "/" + (Number(mov.id) + 1)}>Następny
-                        artykuł &rarr;</Link>
+                    artykuł &rarr;</Link>
                 </div>
                 <div className="header-container">{list}</div>
             </div>;
