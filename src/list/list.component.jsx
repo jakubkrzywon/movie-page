@@ -29,7 +29,7 @@ class List extends Component {
                 <p className="col-title">{item.title}, {item.releaseDate}</p>
 
                 <div className="col-link">
-                    <Link to={"/wiecej/"+this.props.match.params.categoryId+"/"+item.id}>Przeczytaj artykuł</Link>
+                    <Link to={"/kategoria/"+this.props.match.params.categoryId+"/artykul/"+item.id}>Przeczytaj artykuł</Link>
                 </div>
             </div>
         );

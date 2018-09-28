@@ -12,8 +12,8 @@ class Article extends Component {
     }
 
     state = {
-        data: null,
-        index: 0,
+        data: [],
+        navigators: {}
     };
 
     // goBack() {
@@ -22,26 +22,40 @@ class Article extends Component {
     // }
 
     prevArticle = () => {
-        this.props.history.replace('movie/id/previous')
+        this.props.history.push('/kategoria/'+this.props.match.params.categoryId+'/artykul/'+this.state.navigators.previousId)
     };
     nextArticle = () => {
-        this.props.history.replace('movie/id/next')
+        this.props.history.push('/kategoria/'+this.props.match.params.categoryId+'/artykul/'+this.state.navigators.nextId)
     };
 
+
     componentDidMount() {
-        fetch("http://localhost:8080/category/" + this.props.match.params.category)
+        fetch("http://localhost:8080/movie/"+this.props.match.params.id+"/navigators")
             .then(res => res.json())
-            .then(data => this.setState({data: data.movies}))
+            .then(data => this.setState({navigators: data}));
+        fetch("http://localhost:8080/movie/"+this.props.match.params.id)
+            .then(res => res.json())
+            .then(data => this.setState({data: data}))
     }
 
+    componentDidUpdate(prevProps){
+        if(prevProps.match.params.id !== this.props.match.params.id){
+            fetch("http://localhost:8080/movie/"+this.props.match.params.id+"/navigators")
+                .then(res => res.json())
+                .then(data => this.setState({navigators: data}));
+            fetch("http://localhost:8080/movie/"+this.props.match.params.id)
+                .then(res => res.json())
+                .then(data => this.setState({data: data}))
+        }
+    }
     render() {
+        console.log(this.state);
+
         if (this.state.data === null) {
             return null
         }
         console.log(this.state.data);
-        const mov = this.state.data.find(movie => {
-            return movie.id === Number(this.props.match.params.id)
-        });
+        const mov = this.state.data;
         console.log(mov);
         // if (mov === undefined) {
         //     this.props.history.push("/wiecej/" + this.props.match.params.category + "/" + (Number(this.props.match.params.id)+1))
@@ -56,10 +70,10 @@ class Article extends Component {
 
         return <div className="Article">
             <div className="header-list">
-                <button className="prev-article-btn" onClick={this.prevArticle}>&#8592; Poprzedni artykuł |</button>
+                {this.state.navigators.previousId !== null && <button className="prev-article-btn" onClick={this.prevArticle}>&#8592; Poprzedni artykuł |</button>}
                 <Link to={"/" + this.props.match.params.category}>Artykuły</Link>
                 <Link to="/">Strona główna |</Link>
-                <button className="next-article-btn" onClick={this.nextArticle}>Następny artykuł &rarr;</button>
+                {this.state.navigators.nextId !== null && <button className="next-article-btn" onClick={this.nextArticle}>Następny artykuł &rarr;</button>}
             </div>
             <div className="header-container">{list}</div>
         </div>;
