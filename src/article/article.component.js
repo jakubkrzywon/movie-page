@@ -74,7 +74,7 @@ class Article extends Component {
             </div>
             <div className="header-container">{list}</div>
         </div>;
-            
+
     }
 }
 
