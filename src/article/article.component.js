@@ -68,7 +68,7 @@ class Article extends Component {
         return <div className="Article">
             <div className="header-list">
                 {this.state.navigators.previousId !== null && <button className="prev-article-btn" onClick={this.prevArticle}>&#8592; Poprzedni artykuł |</button>}
-                <Link to={"/" + this.props.match.params.category}>Artykuły</Link>
+                <Link to={"/" + this.props.match.params.categoryId}>Artykuły</Link>
                 <Link to="/">Strona główna |</Link>
                 {this.state.navigators.nextId !== null && <button className="next-article-btn" onClick={this.nextArticle}>Następny artykuł &rarr;</button>}
             </div>
